@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Install nginx http://nginx.org/
+Installs nginx http://nginx.org/
 
 Requirements
 ------------
