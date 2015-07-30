@@ -1,0 +1,6 @@
+---
+- name: centos | installing nginx
+  yum: name=nginx state=present
+
+- name: centos | ensuring nginx is started and enabled on boot
+  service: name=nginx state=started enabled=yes
