@@ -8,5 +8,8 @@
 - include: redhat.yml
   when: ansible_os_family == "RedHat"
 
+- include: config_php.yml
+  when: nginx_enable_php5
+
 - include: config_nginx.yml
   when: config_nginx

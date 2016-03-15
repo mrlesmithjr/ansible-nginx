@@ -2,6 +2,8 @@
 # defaults file for ansible-nginx
 config_nginx: false
 nginx_access_log: '/var/log/nginx/access.log'
+nginx_enable_ipv6: false
+nginx_enable_php5: false
 nginx_error_log: '/var/log/nginx/error.log'
 nginx_events_block:
 #  - 'multi_accept on'
@@ -33,4 +35,16 @@ nginx_http_block:
   vhost_configs:
     - 'include /etc/nginx/conf.d/*.conf'
     - 'include /etc/nginx/sites-enabled/*'
+nginx_listen_port: 80
+nginx_server_block:  #defines settings added to /etc/nginx/sites-enabled/default
+  - server_name: 'localhost'
+    default_server: true
+    enable_php: true
+    index:
+      - 'index.html'
+      - 'index.htm'
+    listen: '{{ nginx_listen_port }}'
+    location: '/'
+    root: '{{ nginx_web_root }}'
+    try_files: '$uri $uri/ =404'
 nginx_worker_processes: 4
