@@ -1,31 +1,85 @@
 Role Name
 =========
 
-Installs nginx http://nginx.org/
+Installs and configures NGINX (http://nginx.org/)  
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
+````
+---
+# defaults file for ansible-nginx
+config_nginx: false
+nginx_access_log: '/var/log/nginx/access.log'
+nginx_enable_ipv6: false
+nginx_enable_php5: true
+nginx_error_log: '/var/log/nginx/error.log'
+nginx_events_block:
+#  - 'multi_accept on'
+  - 'worker_connections 768'
+nginx_http_block:
+  basic_settings:
+    - 'keepalive_timeout 65'
+    - 'sendfile on'
+#    - 'server_names_hash_bucket_size 64'
+#    - 'server_name_in_redirect off'
+#    - 'server_tokens off'
+    - 'tcp_nodelay on'
+    - 'tcp_nopush on'
+    - 'types_hash_max_size 2048'
+    - 'include /etc/nginx/mime.types'
+    - 'default_type application/octet-stream'
+  gzip_settings:
+    - 'gzip on'
+    - 'gzip_disable "msie6"'
+#    - 'gzip_vary on'
+#    - 'gzip_proxied any'
+#    - 'gzip_comp_level 6'
+#    - 'gzip_buffers 16 8k'
+#    - 'gzip_http_version 1.1'
+#    - 'gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript'
+  logging_settings:
+    - 'access_log {{ nginx_access_log }}'
+    - 'error_log {{ nginx_error_log }}'
+  vhost_configs:
+    - 'include /etc/nginx/conf.d/*.conf'
+    - 'include /etc/nginx/sites-enabled/*'
+nginx_listen_port: 80
+nginx_server_block:  #defines settings added to /etc/nginx/sites-enabled/default
+  - server_name: 'localhost'
+    default_server: true
+    enable_php: true
+    index:
+      - 'index.php'
+      - 'index.html'
+      - 'index.htm'
+    listen: '{{ nginx_listen_port }}'
+    location: '/'
+    root: '{{ nginx_web_root }}'
+    try_files: '$uri $uri/ =404'
+nginx_worker_processes: 4
+````
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: mrlesmithjr.nginx }
+````
+- hosts: all
+  become: true
+  vars:
+  roles:
+    - role: ansible-nginx
+  tasks:
+````
 
 License
 -------
