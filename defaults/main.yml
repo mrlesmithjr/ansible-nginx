@@ -44,7 +44,10 @@ nginx_server_block:  #defines settings added to /etc/nginx/sites-enabled/default
       - 'index.php'
       - 'index.html'
       - 'index.htm'
-    listen: '{{ nginx_listen_port }}'
+    listen_address:
+      - '*'
+#      - '127.0.1.1'
+    listen_port: '{{ nginx_listen_port }}'
     location: '/'
     root: '{{ nginx_web_root }}'
     try_files: '$uri $uri/ =404'

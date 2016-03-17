@@ -1,6 +1,8 @@
 {% for item in nginx_server_block %}
 server {
-	listen {{ item.listen }}{% if item.default_server is defined and item.default_server %} default_server{% endif %};
+{%   for la in item.listen_address %}
+	listen {{ la }}:{{ item.listen_port }}{% if item.default_server is defined and item.default_server %} default_server{% endif %};
+{%   endfor %}
 	root {{ item.root }};
 	index {{ item.index|join (' ') }};
 	server_name {{ item.server_name }};
