@@ -36,6 +36,8 @@ nginx_http_block:
     - 'include /etc/nginx/conf.d/*.conf'
     - 'include /etc/nginx/sites-enabled/*'
 nginx_listen_port: 80
+nginx_php_set_timezone: false
+nginx_php_timezone: 'America/New_York'
 nginx_server_block:  #defines settings added to /etc/nginx/sites-enabled/default
   - server_name: 'localhost'
     default_server: true
