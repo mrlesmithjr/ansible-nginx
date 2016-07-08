@@ -1,5 +1,5 @@
 ---
-- name: config_php | installing {{ nginx_php_ver }}
+- name: config_php | installing PHP-{{ nginx_php_ver }}
   apt:
     name: "{{ item }}"
     state: "present"
