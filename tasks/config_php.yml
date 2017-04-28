@@ -3,6 +3,7 @@
   apt:
     name: "{{ item }}"
     state: "present"
+  become: true
   with_items:
     - 'php{{ nginx_php_ver }}'
     - 'php{{ nginx_php_ver }}-cli'
@@ -17,6 +18,7 @@
     owner: "root"
     group: "root"
     mode: 0644
+  become: true
   notify:
     - "restart nginx"
     - "restart php{{ nginx_php_ver }}-fpm"

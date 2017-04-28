@@ -8,6 +8,7 @@
     mode: 0644
   notify:
     - restart nginx
+  become: true
 
 - name: config_nginx | configuring default site
   template:
@@ -18,3 +19,4 @@
     mode: 0644
   notify:
     - restart nginx
+  become: true
