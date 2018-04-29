@@ -26,7 +26,8 @@
     nginx_php_path:       etc/php5  #no leading / for template path
     nginx_php_ver:        5
   when:                   >
-        ansible_distribution == "Debian" or
+        (ansible_distribution == "Debian" and
+        ansible_distribution_major_version < '9') or
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version|version_compare('14.04', '<=', strict=true))
 
@@ -43,6 +44,8 @@
     nginx_php_path:       etc/php/7.0  #no leading / for template path
     nginx_php_ver:        7.0
   when:                   >
+        (ansible_distribution == "Debian" and
+        ansible_distribution_major_version == '9') or
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version|version_compare('16.04', '==', strict=true))
 
