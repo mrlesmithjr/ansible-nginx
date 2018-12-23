@@ -25,7 +25,7 @@
     nginx_php_fpm_socket: /var/run
     # no leading / for template path
     nginx_php_path: etc/php5
-    nginx_php_ver: 5
+    nginx_php_ver: "5"
   when: >
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version < '9') or
@@ -37,7 +37,7 @@
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/5
-    nginx_php_ver: 5
+    nginx_php_ver: "5"
   when: ansible_os_family == "Alpine"
 
 - name: setting PHP version
@@ -45,7 +45,7 @@
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7.0
-    nginx_php_ver: 7.0
+    nginx_php_ver: "7.0"
   when: >
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version == '9') or
@@ -57,7 +57,7 @@
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7.2
-    nginx_php_ver: 7.2
+    nginx_php_ver: "7.2"
   when: >
     (ansible_distribution == "Ubuntu" and
     ansible_distribution_version|version_compare('18.04', '==', strict=true))
