@@ -39,7 +39,7 @@
   become: true
   notify:
     - restart nginx
-    - "restart {{ 'php' + nginx_php_ver '-fpm' }}"
+    - "restart php{{ nginx_php_ver }}-fpm"
   with_items:
     - fpm/php.ini
     - cli/php.ini
