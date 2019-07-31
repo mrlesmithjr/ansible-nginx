@@ -28,9 +28,9 @@
     nginx_php_ver: "5"
   when: >
     (ansible_distribution == "Debian" and
-    ansible_distribution_major_version < '9') or
+    ansible_distribution_major_version|int < 9) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version|version_compare('14.04', '<=', strict=true))
+    ansible_distribution_version <= '14.04')
 
 - name: setting PHP version
   set_fact:
@@ -38,7 +38,19 @@
     # no leading / for template path
     nginx_php_path: etc/php/5
     nginx_php_ver: "5"
-  when: ansible_os_family == "Alpine"
+  when: >
+    ansible_os_family == "Alpine" and
+    ansible_distribution_major_version|int < 3
+
+- name: setting PHP version
+  set_fact:
+    nginx_php_fpm_socket: /var/run/php
+    # no leading / for template path
+    nginx_php_path: etc/php/7
+    nginx_php_ver: "7"
+  when: >
+    ansible_os_family == "Alpine" and
+    ansible_distribution_major_version|int >= 3
 
 - name: setting PHP version
   set_fact:
@@ -48,9 +60,9 @@
     nginx_php_ver: "7.0"
   when: >
     (ansible_distribution == "Debian" and
-    ansible_distribution_major_version == '9') or
+    ansible_distribution_major_version|int == 9) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version|version_compare('16.04', '==', strict=true))
+    ansible_distribution_version == '16.04')
 
 - name: setting PHP version
   set_fact:
@@ -59,5 +71,17 @@
     nginx_php_path: etc/php/7.2
     nginx_php_ver: "7.2"
   when: >
+    (ansible_distribution == "Debian" and
+    ansible_distribution_major_version|int == 10) or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_version|version_compare('18.04', '==', strict=true))
+    ansible_distribution_version >= '18.04')
+
+- name: setting PHP version
+  set_fact:
+    nginx_php_fpm_socket: /var/run/php
+    # no leading / for template path
+    nginx_php_path: etc/php/7.3
+    nginx_php_ver: "7.3"
+  when: >
+    (ansible_distribution == "Debian" and
+    ansible_distribution_major_version|int == 10)

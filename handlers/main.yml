@@ -23,3 +23,9 @@
     name: php7.2-fpm
     state: restarted
   become: true
+
+- name: restart php7.3-fpm
+  service:
+    name: php7.3-fpm
+    state: restarted
+  become: true
