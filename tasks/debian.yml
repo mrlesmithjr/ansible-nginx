@@ -6,3 +6,10 @@
   become: true
   register: result
   until: result is successful
+
+- name: debian | ensuring nginx is started and enabled on boot
+  service:
+    name: nginx
+    state: started
+    enabled: true
+  become: true

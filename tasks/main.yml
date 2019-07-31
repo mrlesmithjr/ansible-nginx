@@ -12,7 +12,7 @@
   when: ansible_os_family == "RedHat"
 
 - include: config_php.yml
-  when: nginx_enable_php
+  when: nginx_enable_php|bool
 
 - include: config_nginx.yml
-  when: config_nginx
+  when: config_nginx|bool
