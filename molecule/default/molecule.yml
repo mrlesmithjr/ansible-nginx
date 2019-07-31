@@ -61,6 +61,9 @@ provisioner:
   lint:
     name: ansible-lint
   inventory:
+    group_vars:
+      all:
+        nginx_enable_php: true
     host_vars:
       fedora30:
         ansible_python_interpreter: /usr/bin/python3
