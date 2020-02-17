@@ -1,8 +1,7 @@
 ---
 galaxy_info:
   author: Larry Smith Jr.
-  description: An [Ansible] role to install/configure [NGINX]
-
+  description: Ansible role to install/configure NGINX
   license: MIT
   min_ansible_version: 1.2
 
