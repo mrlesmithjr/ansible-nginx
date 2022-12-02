@@ -61,6 +61,8 @@ jobs:
         run: molecule --version
       - name: Show Docker version info
         run: docker --version
+      - name: Show Ansible community.docker collection version
+        run: ansible-galaxy collection list community.docker
       # - name: Test with molecule
       #   run: |
       #     molecule test --scenario-name ${{ matrix.molecule_distro }}
