@@ -1,27 +1,27 @@
 ---
-- name: setting Alpine facts
-  set_fact:
+- name: Setting Alpine facts
+  ansible.builtin.set_fact:
     nginx_web_group: nginx
     nginx_web_owner: nginx
     nginx_web_root: /var/lib/nginx/html
   when: ansible_os_family == "Alpine"
 
-- name: setting Debian facts
-  set_fact:
+- name: Setting Debian facts
+  ansible.builtin.set_fact:
     nginx_web_group: www-data
     nginx_web_owner: www-data
     nginx_web_root: /usr/share/nginx/html
   when: ansible_os_family == "Debian"
 
-- name: setting RedHat facts
-  set_fact:
+- name: Setting RedHat facts
+  ansible.builtin.set_fact:
     nginx_web_group: nginx
     nginx_web_owner: nginx
     nginx_web_root: /usr/share/nginx/html
   when: ansible_os_family == "RedHat"
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run
     # no leading / for template path
     nginx_php_path: etc/php5
@@ -32,8 +32,8 @@
     (ansible_distribution == "Ubuntu" and
     ansible_distribution_version <= '14.04')
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/5
@@ -42,8 +42,8 @@
     ansible_os_family == "Alpine" and
     ansible_distribution_major_version|int < 3
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7
@@ -52,8 +52,8 @@
     ansible_os_family == "Alpine" and
     ansible_distribution_major_version|int >= 3
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7.0
@@ -64,8 +64,8 @@
     (ansible_distribution == "Ubuntu" and
     ansible_distribution_version == '16.04')
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7.2
@@ -76,8 +76,8 @@
     (ansible_distribution == "Ubuntu" and
     ansible_distribution_version >= '18.04')
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7.3
@@ -86,8 +86,8 @@
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version|int == 10)
 
-- name: setting PHP version
-  set_fact:
+- name: Setting PHP version
+  ansible.builtin.set_fact:
     nginx_php_fpm_socket: /var/run/php
     # no leading / for template path
     nginx_php_path: etc/php/7.4
@@ -95,4 +95,3 @@
   when: >
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version|int == 11)
-

@@ -1,6 +1,6 @@
 ---
-- name: config_php | installing PHP-{{ nginx_php_ver }}
-  apk:
+- name: config_php | Installing PHP-{{ nginx_php_ver }}
+  community.general.packaging.os.apk:
     name:
       [
         "{{ 'php' + nginx_php_ver }}",
@@ -14,8 +14,8 @@
   when: >
     ansible_os_family == "Alpine"
 
-- name: config_php | installing PHP-{{ nginx_php_ver }}
-  apt:
+- name: config_php | Installing PHP-{{ nginx_php_ver }}
+  ansible.builtin.apt:
     name:
       [
         "{{ 'php' + nginx_php_ver }}",
@@ -29,8 +29,8 @@
   when: >
     ansible_os_family == "Debian"
 
-- name: config_php | configuring php.ini
-  template:
+- name: config_php | Configuring php.ini
+  ansible.builtin.template:
     src: "{{ nginx_php_path + '/' + item + '.j2' }}"
     dest: "{{ '/' + nginx_php_path + '/' + item }}"
     owner: root

@@ -1,18 +1,24 @@
 ---
 # tasks file for ansible-nginx
-- include: set_facts.yml
+- name: Set distro specific facts
+  ansible.builtin.include_tasks: set_facts.yml
 
-- include: alpine.yml
+- name: Apply Alpine specific tasks
+  ansible.builtin.include_tasks: alpine.yml
   when: ansible_os_family == "Alpine"
 
-- include: debian.yml
+- name: Apply Debian specific tasks
+  ansible.builtin.include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- include: redhat.yml
+- name: Apply RHEL specific tasks
+  ansible.builtin.include_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
-- include: config_php.yml
+- name: Configure PHP
+  ansible.builtin.include_tasks: config_php.yml
   when: nginx_enable_php|bool
 
-- include: config_nginx.yml
+- name: Configure NGINX
+  ansible.builtin.include_tasks: config_nginx.yml
   when: config_nginx|bool

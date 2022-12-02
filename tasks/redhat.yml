@@ -1,6 +1,6 @@
 ---
-- name: redhat | installing epel repo (RedHat)
-  yum:
+- name: redhat | Installing EPEL repo (RedHat)
+  ansible.builtin.yum:
     name: epel-release
     state: present
   become: true
@@ -8,8 +8,8 @@
   until: result is successful
   when: ansible_distribution != "Fedora"
 
-- name: redhat | installing nginx
-  dnf:
+- name: redhat | Installing NGINX
+  ansible.builtin.dnf:
     name: nginx
     state: present
   become: true
@@ -18,7 +18,7 @@
   when: ansible_distribution == "Fedora"
 
 - name: redhat | Installing NGINX
-  yum:
+  ansible.builtin.yum:
     name: nginx
     state: present
   become: true
@@ -26,8 +26,8 @@
   until: result is successful
   when: ansible_distribution != "Fedora"
 
-- name: redhat | ensuring nginx is started and enabled on boot
-  service:
+- name: redhat | Ensuring NGINX is started and enabled on boot
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: yes
