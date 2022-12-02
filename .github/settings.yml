@@ -10,7 +10,7 @@ repository:
   description: Ansible role to install/configure NGINX
 
   # A comma-separated list of topics to set on the repository
-  topics: ansible, ansible-role
+  topics: ansible,ansible-role
 
 branches:
   - name: main
