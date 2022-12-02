@@ -1,6 +1,6 @@
 ---
 - name: alpine | Installing NGINX
-  apk:
+  community.general.packaging.os.apk:
     name: nginx
     state: present
   become: true

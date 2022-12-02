@@ -1,14 +1,14 @@
 ---
-- name: debian | installing nginx
-  apt:
+- name: debian | Installing NGINX
+  ansible.builtin.apt:
     name: nginx
     state: present
   become: true
   register: result
   until: result is successful
 
-- name: debian | ensuring nginx is started and enabled on boot
-  service:
+- name: debian | Ensuring NGINX is started and enabled on boot
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: true
