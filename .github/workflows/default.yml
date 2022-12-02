@@ -18,21 +18,21 @@ jobs:
       max-parallel: 4
       matrix:
         molecule_distro:
-          # - alpine313
-          # - alpine314
-          # - centos7
-          # - centos8
-          # - debian8
-          # - debian9
-          # - debian10
-          # - debian11
-          # - fedora
-          # - fedora34
-          # - fedora35
-          # - rocky8
-          # - ubuntu1604
-          # - ubuntu1804
+          - alpine313
+          - alpine314
+          - centos7
+          - centos8
+          - debian8
+          - debian9
+          - debian10
+          - debian11
+          - fedora34
+          - fedora35
+          - rocky8
+          - ubuntu1604
+          - ubuntu1804
           - ubuntu2004
+          - ubuntu2204
         python-version: [3.9]
 
     steps:
@@ -57,12 +57,6 @@ jobs:
       - name: Run pre-commit checks
         run: |
           SKIP=no-commit-to-branch pre-commit run --all-files
-      - name: Show Molecule version info
-        run: molecule --version
-      - name: Show Docker version info
-        run: docker --version
-      - name: Show Ansible community.docker collection version
-        run: ansible-galaxy collection list community.docker
       - name: Test with molecule
         run: |
           molecule test --scenario-name ${{ matrix.molecule_distro }}
