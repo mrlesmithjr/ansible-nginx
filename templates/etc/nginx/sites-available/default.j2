@@ -21,6 +21,7 @@ server {
 		fastcgi_pass unix:{{ nginx_php_fpm_socket }}/php{{ nginx_php_ver }}-fpm.sock;
 		fastcgi_index index.php;
 		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 	}
 {%   endif %}
 }
