@@ -1,4 +1,7 @@
-# ansible-nginx
+> [!CAUTION]
+> **This project is archived and no longer maintained.**
+> Archived: 2026-03-26
+> Reason: Low community usage; better alternatives available on Ansible Galaxy# ansible-nginx
 
 Ansible role to install/configure NGINX
 
